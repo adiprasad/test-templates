@@ -1,0 +1,16 @@
+dist: bionic
+
+language: python
+
+services: docker
+
+install:
+  - grep -v "^#" requirements.txt | xargs -n 1 -L 1 pip install
+  - pip install -U pytest
+  - pip install coverage
+  - pip install flake8
+
+
+script:
+  - coverage run --source src -m pytest tests/*.py
+  - coverage report --fail-under=0
